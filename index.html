@@ -552,10 +552,15 @@ function positionHair(){
  hair.style.width=hairWidth+"px";
  hair.style.left=x+"px";
  hair.style.top=y+"px";
- hair.style.transform=
-  "translate(-50%, -8%) rotate("+angle+
-  "rad) skewY("+perspectiveSkew+
-  "deg) scaleX("+(stretchX*perspectiveScale)+")";
+ 
+const lengthScale = currentStyle === "b" ? 1.45 : 1;
+
+hair.style.transform =
+  "translate(-50%, -8%) rotate(" + angle +
+  "rad) skewY(" + perspectiveSkew +
+  "deg) scaleX(" + (stretchX * perspectiveScale) +
+  ") scaleY(" + lengthScale + ")";
+
 
  if(hair.complete&&hair.naturalWidth>0)
   hair.style.visibility="visible";
