@@ -155,6 +155,13 @@ video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block
 <div class="buttons" id="womenStyles" style="display:none">
  <button id="btnA">Blonde Waves</button>
   <button id="btnB">Goddess Braids</button>
+ 
+<div id="braidColors" style="display:none; gap:8px; margin:10px 0; flex-wrap:wrap;">
+  <button type="button" onclick="changeBraidColor('1b')">1B — Natural Black</button>
+  <button type="button" onclick="changeBraidColor('30')">30 — Auburn Brown</button>
+  <button type="button" onclick="changeBraidColor('613')">613 — Blonde</button>
+</div>
+
   <button id="btnC">Pixie Cut</button>
   <button id="btnClear">Clear</button>
 </div>
@@ -557,8 +564,16 @@ function positionHair(){
 for(const slider of [sizeSlider,widthSlider,xSlider,ySlider])
  slider.addEventListener("input",saveSliders);
 
-for(const [key,button] of Object.entries(styleButtons))
- button.onclick=()=>selectStyle(key);
+
+for (const [key, button] of Object.entries(styleButtons)) {
+  button.onclick = () => {
+    selectStyle(key);
+
+    document.getElementById("braidColors").style.display =
+      key === "b" ? "flex" : "none";
+  };
+}
+
 
 $("btnClear").onclick=clearStyle;
 
@@ -665,7 +680,8 @@ updateLabels();
  
 
 function showCategory(category) {
-  const groups = {
+document.getElementById("braidColors").style.display = "none";
+ const groups = {
   straight: ["btnA"],
   braids: ["btnB"],
   short: ["btnC"],
@@ -697,6 +713,38 @@ function showCategory(category) {
   });
 }
 
+
+
+function changeBraidColor(color) {
+  const files = {
+    "1b": "./style-b-1b.png",
+    "30": "./style-b.png",
+    "613": "./style-b-613.png"
+  };
+
+  if (!files[color]) return;
+
+  presets.b.image = files[color];
+
+  originals.b.src = files[color];
+  warpKeys.b = "";
+  delete warpedImages.b;
+
+  selectStyle("b");
+
+  document.getElementById("braidColors").style.display = "flex";
+
+  statusText.textContent =
+    "Goddess Braids — Color " + color + " selected.";
+}
+
+
+  const hairImage = document.getElementById("hair");
+  if (!hairImage) return;
+
+  hairImage.src = files[color];
+  document.getElementById("braidColors").style.display = "flex";
+}
 
 </script>
 </body>
