@@ -1,419 +1,658 @@
 
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>J.E.T.I. Vision | Salon Vanity Edition</title>
 <style>
-/* J.E.T.I. VISION — PINK VANITY SALON EDITION */
-
-:root {
-  --pink: #ef9fc5;
-  --rose: #bd648e;
-  --pale: #ffe4f1;
+*{box-sizing:border-box}
+:root{--pink:#ed9fc4;--pale:#ffe1ee}
+body{
+ margin:0;color:white;font-family:Arial,sans-serif;
+ background:radial-gradient(ellipse at top,#36202f,#09080b 70%);
 }
-
-body {
-  background: radial-gradient(
-    ellipse at top,
-    #392235,
-    #08080a 75%
-  );
+.app{max-width:1180px;margin:auto;padding:18px 12px 36px}
+h1.title{
+ text-align:center;color:#f9d6e7;letter-spacing:4px;
+ font-size:clamp(19px,3vw,30px);margin:8px 0 4px;
 }
-
-.app {
-  width: min(100%, 1180px) !important;
-  padding: 18px 12px 36px;
+.subtitle{
+ text-align:center;color:#dcb3c8;font-size:12px;
+ letter-spacing:2px;margin-bottom:18px;
 }
-
-.vanity-title {
-  text-align: center;
-  color: #ffe0ef;
-  font-size: clamp(19px, 3vw, 30px);
-  letter-spacing: 4px;
-  margin: 10px 0 4px;
+.vanity{
+ display:grid;grid-template-columns:minmax(145px,1fr) minmax(270px,2.1fr) minmax(145px,1fr);
+ gap:12px;align-items:stretch;
 }
-
-.vanity-subtitle {
-  text-align: center;
-  color: #e5b5ce;
-  letter-spacing: 2px;
-  font-size: 11px;
-  margin-bottom: 22px;
+.side{
+ background:linear-gradient(145deg,#f7c6dd,#b96891 55%,#fce1ee);
+ border:3px solid #ffd7ea;border-radius:22px;
+ padding:12px;color:#35192a;
+ box-shadow:0 0 22px #ee80bb55,inset 0 0 15px #fff6;
 }
-
-.vanity-layout {
-  display: grid;
-  grid-template-columns:
-    minmax(145px, 1fr)
-    minmax(270px, 2.2fr)
-    minmax(145px, 1fr);
-  gap: 12px;
-  align-items: stretch;
+.side h2{text-align:center;font-size:13px;letter-spacing:1px;margin:8px 0 16px}
+.adjustments{background:#fff0f6d9;border-radius:13px;padding:12px;color:#422036}
+.slider{margin-bottom:14px}
+.slider label{display:block;font-size:11px;line-height:1.6}
+.slider label span{display:block;font-weight:bold}
+.slider input{width:100%;accent-color:#b54c84}
+button{
+ border:0;background:var(--pale);color:#261923;font-weight:bold;
+ cursor:pointer;border-radius:20px;padding:12px 8px;font-size:12px;
 }
-
-.vanity-side {
-  background: linear-gradient(
-    145deg,
-    #ffe3f0,
-    #df91b8 45%,
-    #b65c89 75%,
-    #fbd4e7
-  );
-  border: 3px solid #ffe0ee;
-  border-radius: 24px;
-  padding: 14px;
-  color: #48253b;
-  box-shadow:
-    0 0 22px #f78ac455,
-    inset 0 0 15px #ffffff88;
+button.active,.start button{background:var(--pink)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.side button{width:100%;margin:5px 0;background:#5b2945;color:white}
+.booking{
+ padding:16px 8px!important;background:#713657!important;
+ border:2px solid #ffe4f0;box-shadow:0 4px 15px #7a315c66;
 }
-
-.vanity-side h2 {
-  text-align: center;
-  font-size: 13px;
-  letter-spacing: 1px;
-  margin: 8px 0 18px;
+.booking-note{font-size:12px;line-height:1.5;text-align:center}
+.vanity-frame{
+ position:relative;padding:23px;border:7px solid #f6c6dd;
+ border-radius:35px;
+ background:linear-gradient(135deg,#fff0f7,#db7ead 30%,#ffdef0 60%,#ac4e7b);
+ box-shadow:0 0 0 3px #a54b7c,0 0 30px #ff8bc08a,inset 0 0 18px #fff;
 }
-
-.vanity-side .adjustments {
-  display: block !important;
-  margin: 0;
-  padding: 12px;
-  background: #fff1f8dd;
-  color: #44253a;
+.vanity-frame:before{
+ content:"";position:absolute;inset:7px;pointer-events:none;
+ border-radius:26px;border:2px dotted #fff4c9;
 }
-
-.vanity-side .slider {
-  margin-bottom: 15px;
+.vanity-frame:after{
+ content:"✦ ✧ ✦";position:absolute;top:3px;left:50%;
+ transform:translateX(-50%);color:#fff9d6;
+ text-shadow:0 0 9px white;pointer-events:none;
+ animation:twinkle 3s ease-in-out infinite alternate;
 }
-
-.vanity-side .slider label {
-  display: block;
-  font-size: 11px;
-  line-height: 1.6;
+@keyframes twinkle{to{opacity:.35}}
+.mirror{
+ position:relative;width:100%;aspect-ratio:3/4;
+ overflow:hidden;background:#181818;
+ border:3px solid #fff1f9;border-radius:18px;isolation:isolate;
 }
-
-.vanity-side .slider label span {
-  display: block;
-  font-weight: bold;
+video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block}
+#hair{
+ position:absolute;display:none;max-width:none;height:auto;
+ pointer-events:none;transform-origin:center;z-index:5;
 }
-
-.vanity-side .slider input {
-  width: 100%;
-  accent-color: #b54c84;
+.brand{
+ position:absolute;top:14px;left:14px;z-index:10;
+ letter-spacing:2px;font-weight:bold;font-size:13px;
+ text-shadow:0 2px 6px black;
 }
-
-.vanity-side button {
-  width: 100%;
-  margin: 5px 0;
-  background: #713b5a;
-  color: white;
+.start{
+ position:absolute;inset:0;z-index:20;background:#101010;
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;gap:20px;text-align:center;padding:20px;
 }
-
-.vanity-frame {
-  position: relative;
-  padding: 24px;
-  border: 7px solid #f8c8df;
-  border-radius: 36px;
-  background: linear-gradient(
-    135deg,
-    #fff1f8,
-    #d875a7 30%,
-    #ffe3f1 60%,
-    #a94979
-  );
-  box-shadow:
-    0 0 0 3px #a34e7d,
-    0 0 35px #ff8fc5aa,
-    inset 0 0 20px #ffffff;
+.start h1{letter-spacing:5px;font-size:30px;margin:0}
+.start p{font-size:13px;color:#ddd;margin:0}
+.start button{padding:14px 24px}
+.vanity-bulbs{position:absolute;inset:0;pointer-events:none}
+.bulb{
+ position:absolute;width:13px;height:13px;background:#fff7df;
+ border:2px solid #fff;border-radius:50%;
+ box-shadow:0 0 8px 3px #fff3c9,0 0 17px 6px #ffb8db;
 }
-
-.vanity-frame::before {
-  content: "";
-  position: absolute;
-  inset: 8px;
-  border: 2px dotted #fff5cf;
-  border-radius: 28px;
-  pointer-events: none;
+.bulb.left{left:4px}.bulb.right{right:4px}
+.bulb:nth-child(1),.bulb:nth-child(6){top:13%}
+.bulb:nth-child(2),.bulb:nth-child(7){top:31%}
+.bulb:nth-child(3),.bulb:nth-child(8){top:49%}
+.bulb:nth-child(4),.bulb:nth-child(9){top:67%}
+.bulb:nth-child(5),.bulb:nth-child(10){top:85%}
+.panel{
+ margin-top:14px;background:#171417;border:1px solid #322630;
+ border-radius:20px;padding:14px;
 }
-
-.vanity-frame::after {
-  content: "✦ ✧ ✦";
-  position: absolute;
-  top: 3px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #fffbdc;
-  text-shadow: 0 0 10px white;
-  animation: jetiSparkle 3s infinite alternate;
-  pointer-events: none;
+.heading{color:#c7b8c1;font-size:11px;letter-spacing:2px;margin-bottom:12px}
+.buttons{display:flex;gap:8px;margin-bottom:9px;flex-wrap:wrap}
+.buttons button{flex:1 1 90px;min-width:0}
+.status{text-align:center;color:#f5d5e6;font-size:12px;padding:12px 2px 0}
+.footer{text-align:center;color:#9e8b97;font-size:11px;letter-spacing:2px;padding-top:20px}
+.mirror:fullscreen{width:100vw;height:100dvh;aspect-ratio:auto;border:0;border-radius:0}
+@media(max-width:700px){
+ .app{padding:10px 5px}
+ .vanity{
+  grid-template-columns:minmax(76px,1fr) minmax(160px,2.7fr) minmax(76px,1fr);
+  gap:4px;
+ }
+ .side{padding:5px 3px;border-width:2px;border-radius:12px}
+ .side h2{font-size:9px;letter-spacing:0;margin:7px 0}
+ .adjustments{padding:4px}
+ .slider{margin-bottom:9px}
+ .slider label,.booking-note{font-size:9px}
+ .side button{font-size:9px;padding:8px 2px}
+ .vanity-frame{padding:14px 9px;border-width:4px;border-radius:19px}
+ .mirror{border-radius:10px}
+ .bulb{width:7px;height:7px;border-width:1px}
+ .bulb.left{left:0}.bulb.right{right:0}
+ .brand{font-size:9px;letter-spacing:1px}
+ .start h1{font-size:20px}
+ .buttons button{font-size:11px}
 }
-
-@keyframes jetiSparkle {
-  from { opacity: 0.4; }
-  to { opacity: 1; }
+@media(max-width:370px){
+ .vanity{grid-template-columns:76px minmax(145px,1fr) 76px}
 }
-
-.vanity-frame .mirror {
-  width: 100%;
-  aspect-ratio: 3 / 4;
-  border: 3px solid #fff3fa;
-  border-radius: 18px;
-  overflow: hidden;
-}
-
-.vanity-lights {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.vanity-bulb {
-  position: absolute;
-  width: 13px;
-  height: 13px;
-  background: #fff8df;
-  border: 2px solid white;
-  border-radius: 50%;
-  box-shadow:
-    0 0 8px 3px #fff5d0,
-    0 0 17px 6px #ffb7dc;
-}
-
-.vanity-bulb.left { left: 4px; }
-.vanity-bulb.right { right: 4px; }
-
-.vanity-bulb:nth-child(1),
-.vanity-bulb:nth-child(6) { top: 13%; }
-
-.vanity-bulb:nth-child(2),
-.vanity-bulb:nth-child(7) { top: 31%; }
-
-.vanity-bulb:nth-child(3),
-.vanity-bulb:nth-child(8) { top: 49%; }
-
-.vanity-bulb:nth-child(4),
-.vanity-bulb:nth-child(9) { top: 67%; }
-
-.vanity-bulb:nth-child(5),
-.vanity-bulb:nth-child(10) { top: 85%; }
-
-.jeti-book {
-  padding: 16px 8px;
-  border: 2px solid #ffe4f0;
-  background: #713657 !important;
-  color: white !important;
-  box-shadow: 0 4px 15px #7a315c66;
-  font-size: 12px;
-}
-
-.booking-note {
-  font-size: 12px;
-  line-height: 1.6;
-  text-align: center;
-}
-
-.vanity-layout #btnAdjust {
-  display: none;
-}
-
-@media (max-width: 700px) {
-  .app {
-    padding: 10px 5px;
-  }
-
-  .vanity-layout {
-    grid-template-columns:
-      minmax(76px, 1fr)
-      minmax(160px, 2.7fr)
-      minmax(76px, 1fr);
-    gap: 4px;
-  }
-
-  .vanity-side {
-    padding: 5px 3px;
-    border-width: 2px;
-    border-radius: 12px;
-  }
-
-  .vanity-side h2 {
-    font-size: 9px;
-    margin: 7px 0;
-  }
-
-  .vanity-side .adjustments {
-    padding: 4px;
-  }
-
-  .vanity-side .slider label,
-  .booking-note {
-    font-size: 9px;
-  }
-
-  .vanity-side button {
-    font-size: 9px;
-    padding: 8px 2px;
-  }
-
-  .vanity-frame {
-    padding: 14px 9px;
-    border-width: 4px;
-    border-radius: 19px;
-  }
-
-  .vanity-frame .mirror {
-    border-radius: 10px;
-  }
-
-  .vanity-bulb {
-    width: 7px;
-    height: 7px;
-    border-width: 1px;
-  }
-
-  .vanity-bulb.left { left: 0; }
-  .vanity-bulb.right { right: 0; }
-
-  .buttons {
-    flex-wrap: wrap;
-  }
-
-  .buttons button {
-    flex: 1 1 40%;
-  }
-
-  .brand {
-    font-size: 9px;
-    letter-spacing: 1px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .vanity-frame::after {
-    animation: none;
-  }
+@media(prefers-reduced-motion:reduce){
+ .vanity-frame:after{animation:none}
 }
 </style>
+</head>
+<body>
+<main class="app">
+<h1 class="title">J.E.T.I. VISION</h1>
+<div class="subtitle">ENVISION. OWN. ✦ SALON EDITION</div>
 
+<div class="vanity">
+ <aside class="side">
+  <h2>✦ ADJUST YOUR LOOK</h2>
+  <div class="adjustments">
+   <div class="slider">
+    <label for="sizeSlider">Hair Size <span id="sizeValue">100%</span></label>
+    <input id="sizeSlider" type="range" min="40" max="200" value="100">
+   </div>
+   <div class="slider">
+    <label for="widthSlider">Hair Width <span id="widthValue">100%</span></label>
+    <input id="widthSlider" type="range" min="70" max="180" value="100">
+   </div>
+   <div class="slider">
+    <label for="ySlider">Up / Down <span id="yValue">0</span></label>
+    <input id="ySlider" type="range" min="-200" max="200" value="0">
+   </div>
+   <div class="slider">
+    <label for="xSlider">Left / Right <span id="xValue">0</span></label>
+    <input id="xSlider" type="range" min="-200" max="200" value="0">
+   </div>
+   <button id="btnResetFit">Reset Hair Fit</button>
+  </div>
+ </aside>
+
+ <div class="vanity-frame">
+  <div class="vanity-bulbs" aria-hidden="true">
+   <i class="bulb left"></i><i class="bulb left"></i>
+   <i class="bulb left"></i><i class="bulb left"></i>
+   <i class="bulb left"></i><i class="bulb right"></i>
+   <i class="bulb right"></i><i class="bulb right"></i>
+   <i class="bulb right"></i><i class="bulb right"></i>
+  </div>
+  <div class="mirror" id="mirror">
+   <video id="video" autoplay muted playsinline></video>
+   <img id="hair" alt="Virtual hairstyle">
+   <div class="brand">J.E.T.I. VISION</div>
+   <div class="start" id="startScreen">
+    <h1>J.E.T.I.</h1>
+    <p>The Future of Hair Starts Here</p>
+    <button id="startButton">Touch to Begin</button>
+   </div>
+  </div>
+ </div>
+
+ <aside class="side">
+  <h2>✦ LOVE YOUR LOOK?</h2>
+  <p class="booking-note">Choose your hairstyle before your appointment.</p>
+  <button class="booking" id="btnBook">BOOK THIS LOOK ♡</button>
+  <p class="booking-note">Salon booking link will be connected when a salon joins the pilot.</p>
+ </aside>
+</div>
+
+<section class="panel">
+ <div class="heading">EXPLORE YOUR LOOK</div>
+ <div class="buttons">
+  <button id="btnA">Blonde Waves</button>
+  <button id="btnB">Goddess Braids</button>
+  <button id="btnC">Pixie Cut</button>
+  <button id="btnClear">Clear</button>
+ </div>
+ <div class="heading">MEN'S HAIRCUTS</div>
+ <div class="buttons">
+  <button id="btnM1">Low Taper Fade</button>
+  <button id="btnM2">360 Waves</button>
+  <button id="btnM3">Textured Crop</button>
+  <button id="btnM4">Classic Side Part</button>
+ </div>
+ <div class="buttons">
+  <button id="btnBlend" class="active">Adaptive Blend: On</button>
+  <button id="btnAuto" class="active">Auto Fit</button>
+  <button id="btnFull">Fullscreen</button>
+  <button id="btnReset">Reset</button>
+ </div>
+ <div class="status" id="status">Ready to begin</div>
+</section>
+<div class="footer">THE J.E.T.I. VISION</div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
 <script>
-/* Upgrade the existing J.E.T.I. interface.
-   Keep the original camera and tracking code. */
+"use strict";
 
-(function () {
-  const app = document.querySelector(".app");
-  const mirror = document.getElementById("mirror");
-  const panel = document.querySelector(".panel");
-  const adjustments =
-    document.getElementById("adjustments");
-  const adjustButton =
-    document.getElementById("btnAdjust");
+const $ = id => document.getElementById(id);
+const mirror = $("mirror");
+const video = $("video");
+const hair = $("hair");
+const statusText = $("status");
+const sizeSlider = $("sizeSlider");
+const widthSlider = $("widthSlider");
+const xSlider = $("xSlider");
+const ySlider = $("ySlider");
+const btnAuto = $("btnAuto");
 
-  if (!app || !mirror || !panel || !adjustments) {
-    return;
-  }
+const styleButtons = {
+ a:$("btnA"),b:$("btnB"),c:$("btnC"),
+ m1:$("btnM1"),m2:$("btnM2"),m3:$("btnM3"),m4:$("btnM4")
+};
 
-  // Add salon branding.
-  const title = document.createElement("h1");
-  title.className = "vanity-title";
-  title.textContent = "J.E.T.I. VISION";
+let currentStyle=null;
+let camera=null;
+let cameraStarted=false;
+let cameraStarting=false;
+let face=null;
+let missingFrames=0;
+let activeImageRequest=0;
+let autoFit=true;
+let blendEnabled=true;
+let lightLevel=.5;
+let lastLightSample=0;
 
-  const subtitle = document.createElement("div");
-  subtitle.className = "vanity-subtitle";
-  subtitle.textContent =
-    "ENVISION. OWN. ✦ SALON EDITION";
+const lightCanvas=document.createElement("canvas");
+lightCanvas.width=64;
+lightCanvas.height=48;
+const lightCtx=lightCanvas.getContext("2d",{willReadFrequently:true});
+const REFERENCE_FACE_WIDTH=150;
 
-  app.prepend(subtitle);
-  app.prepend(title);
+const presets={
+ a:{image:"./style-a.png",size:157,width:118,x:-4,y:-41,widthMultiplier:1.8,hairlineOffset:-.08},
+ b:{image:"./style-b.png?v=2",size:96,width:128,x:13,y:-40,widthMultiplier:1.8,hairlineOffset:-.08},
+ c:{image:"./style-c.png",size:90,width:94,x:-4,y:-65,widthMultiplier:1.8,hairlineOffset:-.08},
+ m1:{image:"./style-m1.png?v=3",size:85,width:100,x:8,y:-70,widthMultiplier:1.8,hairlineOffset:-.08},
+ m2:{image:"./style-m2.png?v=3",size:82,width:99,x:0,y:-74,widthMultiplier:1.8,hairlineOffset:-.08},
+ m3:{image:"./style-m3.png?v=3",size:83,width:95,x:2,y:-61,widthMultiplier:1.8,hairlineOffset:-.08},
+ m4:{image:"./style-m4.png?v=10",size:91,width:88,x:0,y:-66,widthMultiplier:1.8,hairlineOffset:-.08}
+};
 
-  // Create three-column vanity layout.
-  const layout = document.createElement("div");
-  layout.className = "vanity-layout";
+const settings={};
+for(const key of Object.keys(presets)){
+ const p=presets[key];
+ settings[key]={size:p.size,width:p.width,x:p.x,y:p.y};
+}
 
-  const left = document.createElement("aside");
-  left.className = "vanity-side";
-  left.setAttribute(
-    "aria-label",
-    "Hairstyle adjustment controls"
-  );
+const originals={},warpKeys={},warpedImages={};
+const warpPass=document.createElement("canvas");
+const warpOutput=document.createElement("canvas");
 
-  const leftHeading = document.createElement("h2");
-  leftHeading.textContent = "✦ ADJUST YOUR LOOK";
-  left.appendChild(leftHeading);
+for(const [key,preset] of Object.entries(presets)){
+ const img=new Image();
+ originals[key]=img;
+ warpKeys[key]="";
+ img.onload=()=>{
+  warpKeys[key]="";
+  delete warpedImages[key];
+  if(currentStyle===key)positionHair();
+ };
+ img.onerror=()=>{
+  if(currentStyle===key)
+   statusText.textContent="Image missing: "+preset.image.split("?")[0];
+ };
+ img.src=preset.image;
+}
 
-  // Move the original working adjustment sliders.
-  left.appendChild(adjustments);
+function videoCoordinates(point){
+ const mw=mirror.clientWidth,mh=mirror.clientHeight;
+ const vw=video.videoWidth||640,vh=video.videoHeight||480;
+ const scale=Math.max(mw/vw,mh/vh);
+ const rw=vw*scale,rh=vh*scale;
+ const cropX=(rw-mw)/2,cropY=(rh-mh)/2;
+ return{x:(1-point.x)*rw-cropX,y:point.y*rh-cropY};
+}
 
-  const frame = document.createElement("div");
-  frame.className = "vanity-frame";
+function applyCurvedFit(key){
+ const original=originals[key];
+ if(!face||!original||!original.complete||!original.naturalWidth)return;
 
-  // Add Hollywood-style vanity bulbs.
-  const lights = document.createElement("div");
-  lights.className = "vanity-lights";
-  lights.setAttribute("aria-hidden", "true");
+ const templeL=videoCoordinates(face.leftTemple);
+ const templeR=videoCoordinates(face.rightTemple);
+ const foreheadL=videoCoordinates(face.foreheadLeft);
+ const foreheadR=videoCoordinates(face.foreheadRight);
+ const templeWidth=Math.abs(templeR.x-templeL.x);
+ if(templeWidth<10)return;
 
-  for (let i = 0; i < 10; i++) {
-    const bulb = document.createElement("i");
-    bulb.className =
-      "vanity-bulb " + (i < 5 ? "left" : "right");
-    lights.appendChild(bulb);
-  }
+ const ratio=Math.max(.35,Math.min(1.05,
+  Math.abs(foreheadR.x-foreheadL.x)/templeWidth));
+ const isLong=key==="a"||key==="b";
+ const taper=Math.max(.025,Math.min(isLong?.075:.16,
+  (isLong?.06:.13)-(ratio-.65)*.08));
+ const curve=Math.max(.01,Math.min(isLong?.025:.045,
+  (isLong?.018:.025)+(.7-ratio)*.025));
+ const keyForShape=`${Math.round(taper*100)}-${Math.round(curve*1000)}`;
 
-  frame.appendChild(lights);
-  frame.appendChild(mirror);
+ if(warpKeys[key]===keyForShape&&warpedImages[key]){
+  if(currentStyle===key&&hair.src!==warpedImages[key])
+   hair.src=warpedImages[key];
+  return;
+ }
 
-  const right = document.createElement("aside");
-  right.className = "vanity-side";
-  right.setAttribute(
-    "aria-label",
-    "Salon booking"
-  );
+ const w=original.naturalWidth,h=original.naturalHeight;
+ const scale=Math.min(1,900/Math.max(w,h));
+ const cw=Math.max(1,Math.round(w*scale));
+ const ch=Math.max(1,Math.round(h*scale));
+ warpPass.width=cw;warpOutput.width=cw;
+ warpPass.height=ch;warpOutput.height=ch;
+ const a=warpPass.getContext("2d");
+ const b=warpOutput.getContext("2d");
+ a.clearRect(0,0,cw,ch);b.clearRect(0,0,cw,ch);
 
-  const rightHeading = document.createElement("h2");
-  rightHeading.textContent = "✦ LOVE YOUR LOOK?";
+ for(let i=0;i<100;i++){
+  const sy=i*ch/100,sh=Math.min(ch-sy,ch/100+.6);
+  const t=sy/ch;
+  const factor=1-taper*Math.pow(t,1.7);
+  const dw=cw*factor;
+  a.drawImage(original,0,sy/scale,w,sh/scale,
+   (cw-dw)/2,sy,dw,sh);
+ }
 
-  const message = document.createElement("p");
-  message.className = "booking-note";
-  message.textContent =
-    "Choose your hairstyle before your appointment.";
+ for(let i=0;i<140;i++){
+  const sx=i*cw/140,sw=Math.min(cw-sx,cw/140+.65);
+  const x=(sx+sw/2-cw/2)/(cw/2);
+  const shift=ch*curve*Math.max(0,1-x*x);
+  b.drawImage(warpPass,sx,0,sw,ch,sx,shift,sw,ch-shift);
+ }
 
-  const bookButton = document.createElement("button");
-  bookButton.id = "btnBook";
-  bookButton.className = "jeti-book";
-  bookButton.type = "button";
-  bookButton.textContent = "BOOK THIS LOOK ♡";
+ if(key.startsWith("m"))featherInnerEdge(warpOutput);
+ const result=warpOutput.toDataURL("image/png");
+ warpedImages[key]=result;
+ warpKeys[key]=keyForShape;
+ if(currentStyle===key)hair.src=result;
+}
 
-  const note = document.createElement("p");
-  note.className = "booking-note";
-  note.textContent =
-    "Salon booking link coming with the pilot.";
+function featherInnerEdge(canvas){
+ const ctx=canvas.getContext("2d",{willReadFrequently:true});
+ const w=canvas.width,h=canvas.height;
+ const data=ctx.getImageData(0,0,w,h),src=data.data;
+ const alpha=new Uint8Array(w*h);
+ for(let i=0;i<alpha.length;i++)alpha[i]=src[i*4+3];
 
-  right.appendChild(rightHeading);
-  right.appendChild(message);
-  right.appendChild(bookButton);
-  right.appendChild(note);
-
-  layout.appendChild(left);
-  layout.appendChild(frame);
-  layout.appendChild(right);
-
-  // Insert vanity above hairstyle selection.
-  app.insertBefore(layout, panel);
-
-  // Keep adjustment sliders visible at all times.
-  adjustments.classList.add("open");
-
-  if (adjustButton) {
-    adjustButton.style.display = "none";
-  }
-
-  // Booking is a demo placeholder until the salon
-  // provides its actual appointment booking URL.
-  bookButton.addEventListener("click", function () {
-    const status = document.getElementById("status");
-
-    if (status) {
-      status.textContent =
-        "Booking will be available when the salon's appointment link is connected.";
+ const x0=Math.floor(w*.18),x1=Math.ceil(w*.82);
+ const y0=Math.floor(h*.12),y1=Math.ceil(h*.82);
+ for(let y=y0;y<y1;y++){
+  for(let x=x0;x<x1;x++){
+   const i=y*w+x,a=alpha[i];
+   if(a<200)continue;
+   let min=255;
+   for(let dy=-2;dy<=2;dy++){
+    const yy=y+dy;
+    if(yy<0||yy>=h)continue;
+    for(let dx=-2;dx<=2;dx++){
+     const xx=x+dx;
+     if(xx<0||xx>=w)continue;
+     min=Math.min(min,alpha[yy*w+xx]);
     }
-  });
+   }
+   if(min<80)src[i*4+3]=Math.min(a,185);
+  }
+ }
+ ctx.putImageData(data,0,0);
+}
 
-  // Refresh hairstyle alignment after layout change.
-  window.dispatchEvent(new Event("resize"));
-})();
+function updateLighting(landmarks){
+ if(!blendEnabled||!video.videoWidth)return;
+ const now=performance.now();
+ if(now-lastLightSample<250)return;
+ lastLightSample=now;
+ try{
+  lightCtx.drawImage(video,0,0,64,48);
+  const pixels=lightCtx.getImageData(0,0,64,48).data;
+  const points=[landmarks[50],landmarks[280]];
+  let sum=0,count=0;
+  for(const pt of points){
+   const cx=Math.round(pt.x*63),cy=Math.round(pt.y*47);
+   for(let dy=-2;dy<=2;dy++){
+    for(let dx=-2;dx<=2;dx++){
+     const x=cx+dx,y=cy+dy;
+     if(x<0||x>=64||y<0||y>=48)continue;
+     const i=(y*64+x)*4;
+     sum+=(.2126*pixels[i]+.7152*pixels[i+1]+.0722*pixels[i+2])/255;
+     count++;
+    }
+   }
+  }
+  if(count)lightLevel=lightLevel*.85+(sum/count)*.15;
+  const brightness=Math.max(.88,Math.min(1.10,.94+(lightLevel-.35)*.32));
+  hair.style.filter=`brightness(${brightness.toFixed(3)})`;
+ }catch(error){hair.style.filter="none"}
+}
+
+$("btnBlend").onclick=()=>{
+ blendEnabled=!blendEnabled;
+ $("btnBlend").classList.toggle("active",blendEnabled);
+ $("btnBlend").textContent="Adaptive Blend: "+(blendEnabled?"On":"Off");
+ if(!blendEnabled)hair.style.filter="none";
+ else lastLightSample=0;
+};
+
+function updateLabels(){
+ $("sizeValue").textContent=sizeSlider.value+"%";
+ $("widthValue").textContent=widthSlider.value+"%";
+ $("xValue").textContent=xSlider.value;
+ $("yValue").textContent=ySlider.value;
+}
+
+function loadSliders(key){
+ const s=settings[key];
+ sizeSlider.value=s.size;widthSlider.value=s.width;
+ xSlider.value=s.x;ySlider.value=s.y;
+ updateLabels();
+}
+
+function saveSliders(){
+ if(!currentStyle)return;
+ settings[currentStyle]={
+  size:Number(sizeSlider.value),width:Number(widthSlider.value),
+  x:Number(xSlider.value),y:Number(ySlider.value)
+ };
+ autoFit=false;
+ btnAuto.classList.remove("active");
+ updateLabels();positionHair();
+ statusText.textContent="Custom fit active. Tracking continues.";
+}
+
+function selectStyle(key){
+ currentStyle=key;
+ const requestId=++activeImageRequest;
+ const requestedImage=presets[key].image;
+ const testImage=new Image();
+ hair.style.visibility="hidden";
+ hair.style.display="none";
+
+ testImage.onload=()=>{
+  if(requestId!==activeImageRequest||currentStyle!==key)return;
+  hair.src=requestedImage;
+  warpKeys[key]="";
+  delete warpedImages[key];
+  if(face)applyCurvedFit(key);
+  hair.style.display="block";
+  positionHair();
+ };
+ testImage.onerror=()=>{
+  if(requestId!==activeImageRequest||currentStyle!==key)return;
+  hair.style.visibility="hidden";
+  statusText.textContent="Image missing: "+requestedImage.split("?")[0];
+ };
+ testImage.src=requestedImage;
+
+ for(const [id,button] of Object.entries(styleButtons))
+  button.classList.toggle("active",id===key);
+ loadSliders(key);
+ statusText.textContent=autoFit
+  ?"Smart Auto Fit tracking your face."
+  :"Custom fit tracking your face.";
+}
+
+function clearStyle(){
+ currentStyle=null;activeImageRequest++;
+ hair.style.display="none";hair.style.visibility="hidden";
+ for(const button of Object.values(styleButtons))
+  button.classList.remove("active");
+ statusText.textContent="Hairstyle cleared.";
+}
+
+function headTilt(leftEye,rightEye){
+ const dx=rightEye.x-leftEye.x,dy=rightEye.y-leftEye.y;
+ let angle=Math.atan2(dy,dx);
+ if(angle>Math.PI/2)angle-=Math.PI;
+ if(angle< -Math.PI/2)angle+=Math.PI;
+ const limit=25*Math.PI/180;
+ return Math.max(-limit,Math.min(limit,angle));
+}
+
+function positionHair(){
+ if(!currentStyle||!face)return;
+ applyCurvedFit(currentStyle);
+ const preset=presets[currentStyle],s=settings[currentStyle];
+ const forehead=videoCoordinates(face.forehead);
+ const leftTemple=videoCoordinates(face.leftTemple);
+ const rightTemple=videoCoordinates(face.rightTemple);
+ const leftEye=videoCoordinates(face.leftEye);
+ const rightEye=videoCoordinates(face.rightEye);
+ const faceWidth=Math.hypot(
+  rightTemple.x-leftTemple.x,rightTemple.y-leftTemple.y);
+ if(!Number.isFinite(faceWidth)||faceWidth<10){
+  hair.style.visibility="hidden";return;
+ }
+ const faceScale=faceWidth/REFERENCE_FACE_WIDTH;
+ const values=autoFit?preset:s;
+ const hairWidth=faceWidth*preset.widthMultiplier*(values.size/100);
+ const x=forehead.x+values.x*faceScale;
+ const y=forehead.y+faceWidth*preset.hairlineOffset+values.y*faceScale;
+ const angle=headTilt(leftEye,rightEye);
+ const stretchX=values.width/100;
+ const leftSpan=Math.hypot(leftEye.x-leftTemple.x,leftEye.y-leftTemple.y);
+ const rightSpan=Math.hypot(rightTemple.x-rightEye.x,rightTemple.y-rightEye.y);
+ const yaw=(rightSpan-leftSpan)/Math.max(1,rightSpan+leftSpan);
+ const yawClamped=Math.max(-.18,Math.min(.18,yaw));
+ const perspectiveScale=1-Math.abs(yawClamped)*.18;
+ const perspectiveSkew=yawClamped*12;
+
+ hair.style.width=hairWidth+"px";
+ hair.style.left=x+"px";
+ hair.style.top=y+"px";
+ hair.style.transform=
+  "translate(-50%, -8%) rotate("+angle+
+  "rad) skewY("+perspectiveSkew+
+  "deg) scaleX("+(stretchX*perspectiveScale)+")";
+
+ if(hair.complete&&hair.naturalWidth>0)
+  hair.style.visibility="visible";
+}
+
+for(const slider of [sizeSlider,widthSlider,xSlider,ySlider])
+ slider.addEventListener("input",saveSliders);
+
+for(const [key,button] of Object.entries(styleButtons))
+ button.onclick=()=>selectStyle(key);
+
+$("btnClear").onclick=clearStyle;
+
+function resetFit(){
+ if(!currentStyle)return;
+ const p=presets[currentStyle];
+ settings[currentStyle]={size:p.size,width:p.width,x:p.x,y:p.y};
+ autoFit=true;
+ btnAuto.classList.add("active");
+ loadSliders(currentStyle);
+ positionHair();
+ statusText.textContent="Smart Auto Fit enabled.";
+}
+
+btnAuto.onclick=resetFit;
+$("btnResetFit").onclick=resetFit;
+$("btnReset").onclick=()=>location.reload();
+
+$("btnFull").onclick=async()=>{
+ try{
+  if(!document.fullscreenElement)
+   await mirror.requestFullscreen();
+  else await document.exitFullscreen();
+  positionHair();
+ }catch(error){
+  statusText.textContent="Fullscreen is unavailable.";
+ }
+};
+
+function smoothPoint(oldPoint,newPoint){
+ const amount=.3;
+ return{
+  x:oldPoint.x+(newPoint.x-oldPoint.x)*amount,
+  y:oldPoint.y+(newPoint.y-oldPoint.y)*amount
+ };
+}
+
+const mesh=new FaceMesh({
+ locateFile:file=>"https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/"+file
+});
+mesh.setOptions({
+ maxNumFaces:1,refineLandmarks:false,
+ minDetectionConfidence:.6,minTrackingConfidence:.6
+});
+
+mesh.onResults(results=>{
+ const detected=results.multiFaceLandmarks;
+ if(!detected||!detected.length){
+  missingFrames++;
+  if(missingFrames>=3){
+   face=null;hair.style.visibility="hidden";
+  }
+  return;
+ }
+ missingFrames=0;
+ const lm=detected[0];
+ const next={
+  forehead:lm[10],leftTemple:lm[234],rightTemple:lm[454],
+  leftEye:lm[33],rightEye:lm[263],
+  foreheadLeft:lm[71],foreheadRight:lm[301]
+ };
+ if(!face)face=next;
+ else{
+  for(const key of Object.keys(next))
+   face[key]=smoothPoint(face[key],next[key]);
+ }
+ updateLighting(lm);
+ positionHair();
+});
+
+async function startCamera(){
+ if(cameraStarted||cameraStarting)return;
+ cameraStarting=true;
+ $("startButton").disabled=true;
+ $("startButton").textContent="Starting...";
+ try{
+  camera=new Camera(video,{
+   onFrame:async()=>{await mesh.send({image:video})},
+   width:640,height:480
+  });
+  await camera.start();
+  cameraStarted=true;
+  $("startScreen").style.display="none";
+  statusText.textContent="Camera ready. Choose a hairstyle.";
+ }catch(error){
+  console.error(error);
+  $("startButton").disabled=false;
+  $("startButton").textContent="Try Again";
+  statusText.textContent="Camera unavailable. Check permissions.";
+ }finally{cameraStarting=false}
+}
+
+$("startButton").addEventListener("click",startCamera);
+window.addEventListener("resize",positionHair);
+document.addEventListener("fullscreenchange",positionHair);
+
+$("btnBook").addEventListener("click",()=>{
+ statusText.textContent=currentStyle
+  ?"Your look is selected! Salon booking will be available when a booking link is connected."
+  :"Choose a hairstyle first, then book your look.";
+});
+
+updateLabels();
 </script>
+</body>
+</html>
