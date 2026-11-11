@@ -144,6 +144,12 @@ video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block
 <h1 class="title">J.E.T.I. VISION</h1>
 <div class="subtitle">ENVISION. OWN. ✦ SALON EDITION</div>
 
+<div class="buttons" id="topCategories">
+  <button onclick="showCategory('straight')">Straight Styles</button>
+  <button onclick="showCategory('braids')">Braids</button>
+  <button onclick="showCategory('short')">Short Cuts</button>
+</div>
+
 <div class="vanity">
  <aside class="side">
   <h2>✦ ADJUST YOUR LOOK</h2>
@@ -197,13 +203,15 @@ video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block
 </div>
 
 <section class="panel">
+
+</div>
+
  <div class="heading">EXPLORE YOUR LOOK</div>
  <div class="buttons">
   <button id="btnA">Blonde Waves</button>
   <button id="btnB">Goddess Braids</button>
   <button id="btnC">Pixie Cut</button>
   <button id="btnClear">Clear</button>
- </div>
  <div class="heading">MEN'S HAIRCUTS</div>
  <div class="buttons">
   <button id="btnM1">Low Taper Fade</button>
@@ -653,6 +661,30 @@ $("btnBook").addEventListener("click",()=>{
 });
 
 updateLabels();
+ 
+function showCategory(category) {
+  const groups = {
+    straight: ["btnA"],
+    braids: ["btnB"],
+    short: ["btnC", "btnM1", "btnM2", "btnM3", "btnM4"]
+  };
+
+  const selected = groups[category] || [];
+
+  Object.values(styleButtons).forEach(button => {
+    button.style.display = selected.includes(button.id)
+      ? ""
+      : "none";
+  });
+
+  document.querySelectorAll("#topCategories button").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.getAttribute("onclick")?.includes("'" + category + "'")
+    );
+  });
+}
+
 </script>
 </body>
 </html>
