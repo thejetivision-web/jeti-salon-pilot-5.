@@ -667,15 +667,14 @@ function showCategory(category) {
   const groups = {
     straight: ["btnA"],
     braids: ["btnB"],
-    short: ["btnC", "btnM1", "btnM2", "btnM3", "btnM4"]
+    short: ["btnC"]
   };
 
   const selected = groups[category] || [];
 
   document.getElementById("styleHeading").style.display = "block";
   document.getElementById("womenStyles").style.display = "flex";
-  document.getElementById("menStyles").style.display =
-    category === "short" ? "flex" : "none";
+  document.getElementById("menStyles").style.display = "none";
 
   Object.values(styleButtons).forEach(button => {
     button.style.display = selected.includes(button.id)
