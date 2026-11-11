@@ -150,15 +150,15 @@ video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block
   <button onclick="showCategory('short')">Short Cuts</button>
 </div>
 
-<div class="heading">EXPLORE YOUR LOOK</div>
-<div class="buttons">
-  <button id="btnA">Blonde Waves</button>
+<div class="heading" id="styleHeading" style="display:none">CHOOSE YOUR HAIRSTYLE</div>
+<div class="buttons" id="womenStyles" style="display:none">
+ <button id="btnA">Blonde Waves</button>
   <button id="btnB">Goddess Braids</button>
   <button id="btnC">Pixie Cut</button>
   <button id="btnClear">Clear</button>
 </div>
-<div class="heading">MEN'S HAIRCUTS</div>
-<div class="buttons">
+<div class="heading" style="display:none">MEN'S HAIRCUTS</div>
+<div class="buttons" id="menStyles" style="display:none">
   <button id="btnM1">Low Taper Fade</button>
   <button id="btnM2">360 Waves</button>
   <button id="btnM3">Textured Crop</button>
@@ -662,6 +662,7 @@ $("btnBook").addEventListener("click",()=>{
 
 updateLabels();
  
+
 function showCategory(category) {
   const groups = {
     straight: ["btnA"],
@@ -671,19 +672,28 @@ function showCategory(category) {
 
   const selected = groups[category] || [];
 
+  document.getElementById("styleHeading").style.display = "block";
+  document.getElementById("womenStyles").style.display = "flex";
+  document.getElementById("menStyles").style.display =
+    category === "short" ? "flex" : "none";
+
   Object.values(styleButtons).forEach(button => {
     button.style.display = selected.includes(button.id)
       ? ""
       : "none";
   });
 
+  // Keep Clear available after choosing a category.
+  document.getElementById("btnClear").style.display = "";
+
   document.querySelectorAll("#topCategories button").forEach(button => {
     button.classList.toggle(
       "active",
-      button.getAttribute("onclick")?.includes("'" + category + "'")
+      button.getAttribute("onclick").includes("'" + category + "'")
     );
   });
 }
+
 
 </script>
 </body>
