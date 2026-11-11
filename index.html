@@ -148,6 +148,7 @@ video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block
   <button onclick="showCategory('straight')">Straight Styles</button>
   <button onclick="showCategory('braids')">Braids</button>
   <button onclick="showCategory('short')">Short Cuts</button>
+ <button onclick="showCategory('men')">Men's Haircuts</button>
 </div>
 
 <div class="heading" id="styleHeading" style="display:none">CHOOSE YOUR HAIRSTYLE</div>
@@ -665,16 +666,19 @@ updateLabels();
 
 function showCategory(category) {
   const groups = {
-    straight: ["btnA"],
-    braids: ["btnB"],
-    short: ["btnC"]
+  straight: ["btnA"],
+  braids: ["btnB"],
+  short: ["btnC"],
+  men: ["btnM1", "btnM2", "btnM3", "btnM4"]
   };
 
   const selected = groups[category] || [];
 
   document.getElementById("styleHeading").style.display = "block";
-  document.getElementById("womenStyles").style.display = "flex";
-  document.getElementById("menStyles").style.display = "none";
+  document.getElementById("womenStyles").style.display =
+  category === "men" ? "none" : "flex";
+  document.getElementById("menStyles").style.display =
+  category === "men" ? "flex" : "none";
 
   Object.values(styleButtons).forEach(button => {
     button.style.display = selected.includes(button.id)
