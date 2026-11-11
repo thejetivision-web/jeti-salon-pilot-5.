@@ -154,6 +154,13 @@ video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);display:block
 <div class="heading" id="styleHeading" style="display:none">CHOOSE YOUR HAIRSTYLE</div>
 <div class="buttons" id="womenStyles" style="display:none">
  <button id="btnA">Blonde Waves</button>
+ 
+<div id="waveColors" style="display:none; gap:8px; margin:10px 0; flex-wrap:wrap;">
+  <button type="button" onclick="changeWaveColor('1b')">1B — Natural Black</button>
+  <button type="button" onclick="changeWaveColor('30')">30 — Auburn Brown</button>
+  <button type="button" onclick="changeWaveColor('613')">613 — Blonde</button>
+</div>
+
   <button id="btnB">Goddess Braids</button>
  
 <div id="braidColors" style="display:none; gap:8px; margin:10px 0; flex-wrap:wrap;">
@@ -570,15 +577,18 @@ for(const slider of [sizeSlider,widthSlider,xSlider,ySlider])
  slider.addEventListener("input",saveSliders);
 
 
+
 for (const [key, button] of Object.entries(styleButtons)) {
   button.onclick = () => {
     selectStyle(key);
 
     document.getElementById("braidColors").style.display =
       key === "b" ? "flex" : "none";
+
+    document.getElementById("waveColors").style.display =
+      key === "a" ? "flex" : "none";
   };
 }
-
 
 $("btnClear").onclick=clearStyle;
 
@@ -685,6 +695,7 @@ updateLabels();
  
 
 function showCategory(category) {
+ document.getElementById("waveColors").style.display = "none";
 document.getElementById("braidColors").style.display = "none";
  const groups = {
   straight: ["btnA"],
@@ -743,6 +754,27 @@ function changeBraidColor(color) {
     "Goddess Braids — Color " + color + " selected.";
 }
 
+function changeWaveColor(color) {
+  const files = {
+    "1b": "./style-a-1b.png",
+    "30": "./style-a-30.png",
+    "613": "./style-a.png"
+  };
+
+  if (!files[color]) return;
+
+  presets.a.image = files[color];
+  originals.a.src = files[color];
+  warpKeys.a = "";
+  delete warpedImages.a;
+
+  selectStyle("a");
+
+  document.getElementById("waveColors").style.display = "flex";
+
+  statusText.textContent =
+    "Blonde Waves — Color " + color + " selected.";
+}
 </script>
 </body>
 </html>
